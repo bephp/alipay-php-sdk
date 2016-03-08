@@ -155,6 +155,15 @@ class Alipay {
 		return $html;
 	}
 
+    function redirectGateway($params) {
+        $location = 'https://wappaygw.alipay.com/service/rest.htm?_input_charset='. trim(strtolower($this->config['input_charset'])). http_build_query($params);
+        foreach ($params as $key => $value) {
+            $location .= $key. '='. $value. '&';
+        }
+        header('Location: '. $location);
+        //header('Location: https://wappaygw.alipay.com/service/rest.htm?_input_charset='. trim(strtolower($this->config['input_charset'])). http_build_query($params), 302);
+    }
+
 	/**
 	 * 准备移动网页支付的请求参数
 	 * 
